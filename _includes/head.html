@@ -17,19 +17,11 @@
 <link rel="alternate" href="{{ site.feed.path | default: "/feed.xml" | relative_url }}" type="application/atom+xml" title="{{ site.title }}">
 {%- endif -%}
 {%- if page.mathjax or site.mathjax -%}
-<script>
-	window.MathJax = {
-		tex: {
-			inlineMath: [["$", "$"], ["\\(", "\\)"]],
-			displayMath: [["$$", "$$"], ["\\[", "\\]"]],
-			processEscapes: true,
-		},
-		options: {
-			skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"],
-		}
-	};
-</script>
-<script defer id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link rel="stylesheet" href="{{ "/assets/katex/katex.min.css" | relative_url }}">
+{% unless site.plugins contains "jektex" %}
+<script defer src="{{ "/assets/katex/katex.min.js" | relative_url }}"></script>
+<script defer src="{{ "/assets/katex/contrib/auto-render.min.js" | relative_url }}" onload="renderMathInElement(document.body)"></script>
+{%- endunless -%}
 {%- endif -%}
 {%- if site.comments.disqus_shortname and page.layout == "post" -%}
 <script src="//{{ site.comments.disqus_shortname }}.disqus.com/embed.js" async></script>

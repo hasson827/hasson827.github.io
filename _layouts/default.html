@@ -1,32 +1,23 @@
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang }}">
 
-<head>
-  {% include head.html %}
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-</head>
+{% include head.html %}
 
-<body>
-  <header class="hover smooth">
-    {% unless site.show_minimal and site.navigation and site.external %}
-    <h1 {% if site.navigation and site.external %}class="full" {% endif %}><a href="{{ " /" | relative_url }}">{{
-        site.title | escape }}</a></h1>
-    {% endunless %}
-    {% include menu.html menu=site.navigation %}
-    {% include menu.html menu=site.external %}
-  </header>
+<header class="hover smooth">
+  {% unless site.show_minimal and site.navigation and site.external %}
+    <h1 {% if site.navigation and site.external %}class="full"{% endif %}><a href="{{ "/" | relative_url }}">{{ site.title | escape }}</a></h1>
+  {% endunless %}
+  {% include menu.html menu=site.navigation %}
+  {% include menu.html menu=site.external %}
+</header>
 
-  {%- if site.show_sidebar %}{% include sidebar.html %}{% endif %}
+{{ content }}
 
-  {{ content }}
-
-  {%- if site.footer -%}
-  <footer class="hover">
-    <div>{{ site.description }}</div>
-    {% include menu.html menu=site.footer %}
-  </footer>
-  {%- endif -%}
-
-</body>
+{%- if site.footer -%}
+<footer class="hover">
+  <div>{{ site.description }}</div>
+  {% include menu.html menu=site.footer %}
+</footer>
+{%- endif -%}
 
 </html>
