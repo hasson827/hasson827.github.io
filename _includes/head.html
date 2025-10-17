@@ -20,27 +20,8 @@
 {%- if page.mathjax or site.mathjax -%}
 <link rel="stylesheet" href="{{ " /assets/katex/katex.min.css" | relative_url }}">
 {% unless site.plugins contains "jektex" %}
-<script defer src="{{ " /assets/katex/katex.min.js" | relative_url }}"></script>
-<script defer src="{{ " /assets/katex/contrib/auto-render.min.js" | relative_url }}"></script>
-<script>
-	document.addEventListener("DOMContentLoaded", function () {
-		if (typeof renderMathInElement === 'function') {
-			try {
-				renderMathInElement(document.body, {
-					delimiters: [
-						{ left: "$$", right: "$$", display: true },
-						{ left: "\\[", right: "\\]", display: true },
-						{ left: "$", right: "$", display: false },
-						{ left: "\\(", right: "\\)", display: false }
-					],
-					throwOnError: false,
-					strict: "ignore",
-					ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"]
-				});
-			} catch (e) { }
-		}
-	});
-</script>
+<script defer src="{{ "/assets/katex/katex.min.js" | relative_url }}"></script>
+<script defer src="{{ "/assets/katex/contrib/auto-render.min.js" | relative_url }}" onload="renderMathInElement(document.body)"></script>
 {%- endunless -%}
 {%- endif -%}
 {%- if site.comments.disqus_shortname and page.layout == "post" -%}
