@@ -54,13 +54,13 @@ categories: Generative Modeling
 
 ## ResNet和欧拉法之间的关系
 
-**欧拉法**：假设有一个未知曲线$h(t)$，和一个给定的微分方程，且能通过这个微分方程算出曲线任意一点的导数$f(t,h(t))$。那么给定$t_{0}$和$h(t_{0})$，我们就可以用欧拉法求解$t_{1}$和$h(t_{1})$的值。
+**欧拉法**：假设有一个未知曲线 $h(t)$ ，和一个给定的微分方程，且能通过这个微分方程算出曲线任意一点的导数 $f(t,h(t))$ 。那么给定 $t_{0}$ 和 $h(t_{0})$ ，我们就可以用欧拉法求解 $t_{1}$ 和 $h(t_{1})$ 的值。
 
 $$
 h(t_{1}) = h(t_{0})+f(t_{0},h(t_{0}))\cdot(t_{1}-t_{0})
 $$
 
-如果$t_{1}\to t_{0}$，那么有：
+如果 $t_{1}\to t_{0}$ ，那么有：
 
 $$
 h(t_{1}) = h(t_{0})+f(t_{0},h(t_{0}))dt
@@ -76,7 +76,7 @@ h_{t+1} &= \text{ReLU}(W_{t},h_{t}+b_{t})+h_{t}
 \end{aligned}
 $$
 
-ResNet当中的一个残差快可以看成欧拉法中$dt=1$的特殊情况。因此我们只需要对这个“导数”进行建模就可以了。
+ResNet当中的一个残差快可以看成欧拉法中 $dt=1$ 的特殊情况。因此我们只需要对这个“导数”进行建模就可以了。
 
 ## 用欧拉法建模的Neural ODE的形式
 
@@ -98,7 +98,7 @@ $$
 \int_{t_{0}}^{t_{1}}{dh(t)} = \int_{t_{0}}^{t_{1}}{f(h(t),t,\theta)dt}
 $$
 
-这就是欧拉法要求解的微分方程的形式，$t_{1}$可以取任何值，从$t_{0}$到$t_{1}$的过程是连续的。
+这就是欧拉法要求解的微分方程的形式， $t_{1}$ 可以取任何值，从 $t_{0}$ 到 $t_{1}$ 的过程是连续的。
 
 由于Neural ODE的根本目的就是求解微分方程，因此我们可以给出其损失函数：
 
@@ -114,7 +114,7 @@ $$
 
 理论上，我们可以根据前向传播的方向，直接微分反向传播就可以更新参数。然而，这种方式会导致高内存成本和额外的数值误差，因此作者采用**伴随灵敏度法**来计算梯度，具体如下：
 
-假设通过前向传播得到了一个ODE的解为$h(t)$，我们定义一个伴随状态(Adjoint States)
+假设通过前向传播得到了一个ODE的解为 $h(t)$ ，我们定义一个伴随状态(Adjoint States)
 
 $$
 \begin{equation}
@@ -134,19 +134,19 @@ $$
 h(t+\delta) = h(t)+\int_{t}^{t+\delta}{f(h(t'),t',\theta)dt'}
 $$
 
-因此我们将$h(t+\delta)$带入$a(t)$的表达式中，可以得到：
+因此我们将 $h(t+\delta)$ 带入 $a(t)$ 的表达式中，可以得到：
 
 $$
 a(t) = a(t+\delta)\frac{\partial h(t+\delta)}{\partial h(t)} = a(t+\delta)\frac{\partial}{\partial h(t)}\left( h(t)+ \int_{t}^{t+\delta}{f(h(t'),t',\theta)dt'} \right)
 $$
 
-将导数项中的$h(t)$提取出来，可以得到：
+将导数项中的 $h(t)$ 提取出来，可以得到：
 
 $$
 a(t) = a(t+\delta)+a(t+\delta)\frac{\partial}{\partial h(t)}\left( \int_{t}^{t+\delta}{f(h(t'),t',\theta)dt'} \right)
 $$
 
-因此我们可以求得$a(t)$的导数：
+因此我们可以求得 $a(t)$ 的导数：
 
 $$
 \begin{equation}
@@ -160,7 +160,7 @@ $$
 \end{equation}
 $$
 
-现在总结一下，我们已经有了伴随状态的微分方程，即式$\eqref{eq2}$。如果我们已知$t_{1}$时刻的损失函数，由式$\eqref{eq1}$可以得到一个伴随状态。我们也可以再次使用欧拉法推导出$h$在$t_{0}$时刻的伴随状态，即：
+现在总结一下，我们已经有了伴随状态的微分方程，即式 $\eqref{eq2}$ 。如果我们已知 $t_{1}$ 时刻的损失函数，由式 $\eqref{eq1}$ 可以得到一个伴随状态。我们也可以再次使用欧拉法推导出 $h$ 在 $t_{0}$ 时刻的伴随状态，即：
 
 $$
 \begin{aligned}
@@ -170,15 +170,15 @@ a(t_{0}) &= a(t_{1})+\int_{t_{1}}^{t_{0}}{\frac{da(t)}{dt}dt}
 \end{aligned}
 $$
 
-我们不仅可以推导出损失函数关于$h(t)$的梯度，也可以推导出损失函数关于$t$和$\theta(t)$的梯度。
+我们不仅可以推导出损失函数关于 $h(t)$ 的梯度，也可以推导出损失函数关于 $t$ 和 $\theta(t)$ 的梯度。
 
-假设$\theta,t$都是状态，并且拥有恒定的微分方程表达式
+假设 $\theta,t$ 都是状态，并且拥有恒定的微分方程表达式
 
 $$
 \frac{\partial{\theta(t)}}{\partial{t}} = 0\qquad \frac{\partial{t(t)}}{\partial{t}} = 1
 $$
 
-把$h,\theta,t$结合起来，形成一个增广的ODE，即
+把 $h,\theta,t$ 结合起来，形成一个增广的ODE，即
 
 $$
 \frac{d}{dt}\begin{bmatrix}
@@ -195,7 +195,7 @@ h\\\theta\\t
  a_{\theta}(t) = \frac{d\mathcal{L}}{d\theta(t)};\;a_{t}(t)=\frac{d\mathcal{L}}{dt(t)}
 $$
 
-那么，如果对于这个增广的ODE关于$h,\theta,t$分别求偏导，则
+那么，如果对于这个增广的ODE关于 $h,\theta,t$ 分别求偏导，则
 
 $$
 \frac{\partial{f_{aug}}}{\partial[h,\theta,t]} = \begin{bmatrix}
@@ -211,7 +211,7 @@ $$
 
 其中，0是一个具有适当尺寸的零矩阵。
 
-所以依据$\frac{da(t)}{dt}$的表达式，我们可以得到其增广形式的表达式：
+所以依据 $\frac{da(t)}{dt}$ 的表达式，我们可以得到其增广形式的表达式：
 
 $$
 \frac{da_{aug}(t)}{dt} = -\begin{bmatrix}
@@ -229,13 +229,13 @@ $$
 \frac{da_{t}(t)}{dt} = -a(t)\frac{\partial{f}}{\partial{t}}
 $$
 
-设定$a_{\theta}(t_{N}) = 0$，则有：
+设定 $a_{\theta}(t_{N}) = 0$ ，则有：
 
 $$
 \frac{d\mathcal{L}}{d\theta} = a_{\theta}(t_{0}) = a_{\theta}(t_{N})-\int_{t_{N}}^{t_{0}}{a(t)\frac{\partial{f(h(t),\theta,t)}}{\partial{\theta}}dt} = -\int_{t_{N}}^{t_{0}}{a(t)\frac{\partial{f(h(t),\theta,t)}}{\partial{\theta}}dt}
 $$
 
-实际应用的时候，我们通过ODE数值求解，求解出$a_{\theta}(t_{0})$
+实际应用的时候，我们通过ODE数值求解，求解出 $a_{\theta}(t_{0})$
 
 $$
 a_{\theta}(t_{N-1}) = a_{\theta}(t_{N})+\epsilon\left( -a(t_{N})\frac{\partial{f}}{\partial{\theta}} \right)
@@ -291,13 +291,13 @@ $$
 
 ### Normalizing Flow To Continuous
 
-在之前讲过的归一化流中，曾经提到一个**变量替换定理**，假设存在$z_{1}=f(z_{0})$，函数$f$存在反函数，则
+在之前讲过的归一化流中，曾经提到一个**变量替换定理**，假设存在 $z_{1}=f(z_{0})$ ，函数 $f$ 存在反函数，则
 
 $$
 \log{p(z_{1})} = \log{p(z_{0})} - \log\left| \text{det}{\frac{\partial{f}}{\partial{z_{0}}}} \right|
 $$
 
-如果我们把这个式子加入一个步长$h=1$，那么就和前面的欧拉法基本一样了：
+如果我们把这个式子加入一个步长 $h=1$ ，那么就和前面的欧拉法基本一样了：
 
 $$
 \begin{aligned}
@@ -307,13 +307,13 @@ $$
 \end{aligned}
 $$
 
-为了表达的一致性，我们大可以将$\log{p(z_{1})} - \log{p(z_{0})}$也称为一般化的形式，即$\log{p(z_{t+1})}-\log{p(z_{t})}$，所以
+为了表达的一致性，我们大可以将 $\log{p(z_{1})} - \log{p(z_{0})}$ 也称为一般化的形式，即 $\log{p(z_{t+1})}-\log{p(z_{t})}$ ，所以
 
 $$
 \frac{\partial{\log{p(z(t))}}}{\partial{t}} = - \log\left| \text{det}{\frac{\partial{f}}{\partial{z(t)}}} \right|
 $$
 
-变换函数$f$也表示为一个微分方程
+变换函数 $f$ 也表示为一个微分方程
 
 $$
 \frac{dz}{dt}=f(z(t),t)
@@ -329,7 +329,7 @@ $$
 \frac{\partial{\log{p(z(t))}}}{\partial{t}} = -\tr{\left( \frac{df}{dz(t)} \right)}
 $$
 
-此时，我们不难发现，这个公式，竟然不再需要求行列式，而是求雅可比矩阵的迹，我们知道，矩阵的迹就是对角线上的值求和，这是非常容易计算的。除此之外，微分方程$f$不再需要是双射的，因为一旦满足唯一性条件，那么整个变换自动成为双射（双射意味着存在反函数）。
+此时，我们不难发现，这个公式，竟然不再需要求行列式，而是求雅可比矩阵的迹，我们知道，矩阵的迹就是对角线上的值求和，这是非常容易计算的。除此之外，微分方程 $f$ 不再需要是双射的，因为一旦满足唯一性条件，那么整个变换自动成为双射（双射意味着存在反函数）。
 
 **这个公式为什么重要**：
 
@@ -351,7 +351,7 @@ $$
 z(t+\epsilon) = z(t)+\epsilon\cdot f(z(t),t,\theta)+\dots=T_{\epsilon}(z(t))
 $$
 
-我们假设$f$在$z(t)$上是$Lipschitz$连续的，并且在$t$上是连续的，因此根据Picard存在定理，每个初值问题都有唯一解。我们还假设$z(t)$是有界的。这些条件意味着$f,T_{\epsilon},\frac{\partial{T_{\epsilon}}}{\partial{z}}$都是有界的。那么我们可以得到
+我们假设 $f$ 在 $z(t)$ 上是 $Lipschitz$ 连续的，并且在 $t$ 上是连续的，因此根据Picard存在定理，每个初值问题都有唯一解。我们还假设 $z(t)$ 是有界的。这些条件意味着 $f,T_{\epsilon},\frac{\partial{T_{\epsilon}}}{\partial{z}}$ 都是有界的。那么我们可以得到
 
 $$
 \begin{aligned}
@@ -393,7 +393,7 @@ $$
 \frac{\partial}{\partial{\epsilon}} \left(\text{det}{\frac{\partial}{\partial{z}}T_{\epsilon}(z(t))} \right) = \text{det}{\frac{\partial}{\partial{z}}T_{\epsilon}(z(t))}\tr{\left( \frac{1}{\text{det}{\frac{\partial}{\partial{z}}T_{\epsilon}(z(t))}} \text{adj}\left( \frac{\partial}{\partial{z}}T_{\epsilon}(z(t)) \right) \frac{\partial}{\partial{\epsilon}}\frac{\partial}{\partial{z}}{T_{\epsilon}(z(t))} \right)}
 $$
 
-当$\epsilon\to0^{+}$时，$\det{\frac{\partial}{\partial{z}}T_{\epsilon}(z(t))}=1$，所以
+当 $\epsilon\to0^{+}$ 时， $\det{\frac{\partial}{\partial{z}}T_{\epsilon}(z(t))}=1$ ，所以
 
 $$
 \begin{aligned}
@@ -405,7 +405,7 @@ $$
 \end{aligned}
 $$
 
-将$T_{\epsilon}$进行泰勒展开即可得到结果
+将 $T_{\epsilon}$ 进行泰勒展开即可得到结果
 
 $$
 \begin{aligned}
@@ -447,7 +447,7 @@ $$
 
 ### 密度变换的计算
 
-给定初始分布$p(z(0))$，目标分布$p(z(T))$的对数密度为：
+给定初始分布 $p(z(0))$ ，目标分布 $p(z(T))$ 的对数密度为：
 
 $$
 \log{p(z(T))} = \log{p(z(0))}-\int_{0}^{T}{\tr\left( \frac{df(\tau)}{dz} \right)d\tau}
@@ -495,7 +495,7 @@ $$
     f(z(t),t,\theta(t))
     $$
 
-    其中$\theta(t)$是$t$的函数
+    其中 $\theta(t)$ 是 $t$ 的函数
 
 2.  **门控机制**：
 
