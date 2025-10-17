@@ -19,7 +19,6 @@ show_minimal: false             # remove all clutter
 
 navigation:                     # accepts {file, title, url, icon, sidebaricon}
   - {file: "Hasson.pdf", title: CV, sidebaricon: home}
-  - {file: "/blog.md", title: Blog}
 
 external:                       # accepts {file, title, url, icon, sidebaricon}
   - {title: Mail, icon: envelope, url: "mailto:hongshuo.24@intl.zju.edu.cn"}
