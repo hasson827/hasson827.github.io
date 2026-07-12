@@ -3,7 +3,7 @@
  */
 
 // Site configuration
-export const SITE_URL = 'https://mldangelo.com';
+export const SITE_URL = 'https://hasson827.github.io';
 export const AUTHOR_NAME = "Michael D'Angelo";
 export const TWITTER_HANDLE = '@dangelosaurus';
 export const SITE_IMAGE_PATH = '/images/me.jpg';
