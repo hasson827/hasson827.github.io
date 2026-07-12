@@ -9,7 +9,7 @@ export const TWITTER_HANDLE = undefined;
 export const SITE_IMAGE_PATH = '/images/me.jpg';
 export const SITE_IMAGE_DIMENSIONS = {
   width: 1280,
-  height: 1830,
+  height: 1280,
 } as const;
 
 // Canonical one-line bio, shared across page metadata, OpenGraph, and JSON-LD.
