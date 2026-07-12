@@ -48,25 +48,26 @@ describe('Site', () => {
       screen.getByText('Stars this repository has on github'),
     ).toBeInTheDocument();
     expect(screen.getByText('Number of forks')).toBeInTheDocument();
-    expect(screen.getByText('Number of spoons')).toBeInTheDocument();
+    expect(
+      screen.getByText('Number of people watching this repository'),
+    ).toBeInTheDocument();
   });
 
   it('displays static values for non-GitHub stats', async () => {
     const Component = await Site();
     render(Component);
 
-    expect(screen.getByText('Number of spoons')).toBeInTheDocument();
-    expect(screen.getByText('Number of linter warnings')).toBeInTheDocument();
+    expect(screen.queryByText('Number of spoons')).not.toBeInTheDocument();
     expect(
-      screen.getByText('Lines of TypeScript powering this website'),
-    ).toBeInTheDocument();
+      screen.queryByText('Number of linter warnings'),
+    ).not.toBeInTheDocument();
   });
 
   it('fetches GitHub data at build time', async () => {
     await Site();
 
     expect(global.fetch).toHaveBeenCalledWith(
-      'https://api.github.com/repos/mldangelo/personal-site',
+      'https://api.github.com/repos/hasson827/hasson827.github.io',
       expect.objectContaining({
         headers: expect.objectContaining({
           Accept: 'application/vnd.github.v3+json',
@@ -80,7 +81,7 @@ describe('Site', () => {
     render(Component);
 
     const links = document.querySelectorAll(
-      'a[href="https://github.com/mldangelo/personal-site/stargazers"]',
+      'a[href="https://github.com/hasson827/hasson827.github.io/stargazers"]',
     );
     expect(links.length).toBeGreaterThan(0);
   });

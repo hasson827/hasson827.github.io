@@ -28,24 +28,20 @@ describe('Personal', () => {
     render(<Personal />);
 
     expect(screen.getByText('Countries visited')).toBeInTheDocument();
-    expect(screen.getByText('53')).toBeInTheDocument();
+    expect(screen.getByText('5')).toBeInTheDocument();
   });
 
-  it('displays current city', () => {
+  it('displays current location', () => {
     render(<Personal />);
 
-    expect(screen.getByText('Current city')).toBeInTheDocument();
-    expect(screen.getByText('New York, NY')).toBeInTheDocument();
+    expect(screen.getByText('Current location')).toBeInTheDocument();
+    expect(screen.getByText('Zhejiang, China')).toBeInTheDocument();
   });
 
-  it('has a link for countries visited', () => {
+  it('does not render a link for countries visited', () => {
     render(<Personal />);
 
-    const link = screen.getByRole('link', { name: /53/i });
-    expect(link).toHaveAttribute(
-      'href',
-      'https://www.google.com/maps/d/embed?mid=1iBBTscqateQ93pWFVfHCUZXoDu8&z=2',
-    );
+    expect(screen.queryByRole('link', { name: /5/i })).not.toBeInTheDocument();
   });
 
   it('updates age over time', async () => {

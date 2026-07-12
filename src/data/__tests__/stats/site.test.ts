@@ -32,14 +32,10 @@ describe('site stats data', () => {
     }
   });
 
-  it('has static stats without keys', () => {
+  it('has only GitHub API stats', () => {
     const staticStats = data.filter((s) => !s.key);
 
-    expect(staticStats.length).toBeGreaterThan(0);
-
-    // Check for known static stats
-    expect(staticStats.some((s) => s.label.includes('spoons'))).toBe(true);
-    expect(staticStats.some((s) => s.label.includes('linter'))).toBe(true);
+    expect(staticStats.length).toBe(0);
   });
 
   it('stats with links have valid URLs', () => {
@@ -65,11 +61,11 @@ describe('site stats data', () => {
     expect(formatted).toBe('January 15, 2024');
   });
 
-  it('has lines of code stat', () => {
-    const locStat = data.find((s) => s.label.includes('Lines of TypeScript'));
-
-    expect(locStat).toBeDefined();
-    expect(locStat!.value).toBeDefined();
-    expect(locStat!.link).toContain('github.com');
+  it('all stats link to the correct repository', () => {
+    for (const stat of data) {
+      if (stat.link) {
+        expect(stat.link).toContain('hasson827/hasson827.github.io');
+      }
+    }
   });
 });
