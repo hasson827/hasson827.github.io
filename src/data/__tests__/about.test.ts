@@ -10,8 +10,9 @@ describe('about data', () => {
 
   it('contains the intro section', () => {
     expect(aboutMarkdown).toContain('# Intro');
-    expect(aboutMarkdown).toContain('OpenAI');
-    expect(aboutMarkdown).toContain('Promptfoo');
+    expect(aboutMarkdown).toContain('Hongshuo Zhao');
+    expect(aboutMarkdown).toContain('Zhejiang University');
+    expect(aboutMarkdown).toContain('University of Illinois Urbana-Champaign');
   });
 
   it('contains the history section', () => {

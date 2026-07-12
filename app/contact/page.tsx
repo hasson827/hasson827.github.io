@@ -8,7 +8,7 @@ import { createPageMetadata } from '@/lib/metadata';
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Contact',
-  description: "Contact Michael D'Angelo via email @ hi@mldangelo.com",
+  description: 'Contact Hongshuo Zhao via email or GitHub.',
   path: '/contact/',
 });
 
@@ -31,6 +31,14 @@ export default function ContactPage() {
           </div>
 
           <ContactIcons />
+
+          <div className="contact-divider">
+            <span>phone</span>
+          </div>
+
+          <a href="tel:+8618801542333" className="contact-phone">
+            +86 188 0154 2333
+          </a>
         </div>
       </section>
     </PageWrapper>

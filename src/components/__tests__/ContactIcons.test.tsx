@@ -15,13 +15,12 @@ describe('ContactIcons', () => {
       expect.stringContaining('github.com'),
     );
 
-    // Check if email link is present
-    const emailLink = screen.getByRole('link', { name: /email/i });
-    expect(emailLink).toBeInTheDocument();
-    expect(emailLink).toHaveAttribute(
-      'href',
-      expect.stringContaining('mailto:'),
-    );
+    // Check if email links are present
+    const emailLinks = screen.getAllByRole('link', { name: /email/i });
+    expect(emailLinks.length).toBeGreaterThan(0);
+    for (const link of emailLinks) {
+      expect(link).toHaveAttribute('href', expect.stringContaining('mailto:'));
+    }
   });
 
   it('has correct number of contact links', () => {

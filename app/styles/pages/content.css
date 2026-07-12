@@ -303,6 +303,28 @@
   color: var(--color-accent);
 }
 
+/* Phone number */
+.contact-phone {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+  background: var(--color-accent-light);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.contact-phone:hover {
+  background: color-mix(in srgb, var(--color-accent-light) 70%, var(--color-accent) 30%);
+  transform: translateY(var(--lift-sm));
+  box-shadow: var(--shadow-md);
+}
+
 @media (max-width: 736px) {
   .about-section-nav {
     margin: var(--spacing-6) 0 var(--spacing-5);
