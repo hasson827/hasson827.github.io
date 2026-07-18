@@ -1,12 +1,12 @@
 import Link from 'next/link';
 
 import ContactIcons from '@/components/Contact/ContactIcons';
-import work from '@/data/resume/work';
+import { CURRENT_ORGANIZATION, CURRENT_POSITION } from '@/lib/utils';
 
 import ThemePortrait from './ThemePortrait';
 
 export default function Footer() {
-  const currentRole = `${work[0].position} at ${work[0].name}`;
+  const currentRole = `${CURRENT_POSITION} at ${CURRENT_ORGANIZATION}`;
 
   return (
     <footer className="site-footer-new">

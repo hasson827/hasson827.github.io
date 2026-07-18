@@ -1,9 +1,11 @@
 import contact from '@/data/contact';
 import degrees from '@/data/resume/degrees';
-import work from '@/data/resume/work';
 import type { Post } from '@/lib/posts';
 import {
   AUTHOR_NAME,
+  CURRENT_ORGANIZATION,
+  CURRENT_ORGANIZATION_URL,
+  CURRENT_POSITION,
   SITE_DESCRIPTION,
   SITE_IMAGE_DIMENSIONS,
   SITE_IMAGE_PATH,
@@ -63,8 +65,6 @@ export function personNode(): SchemaNode {
   const emailItem = contact.find((item) => item.link.startsWith('mailto:'));
   const email = emailItem?.link.replace('mailto:', '');
 
-  const currentJob = work[0];
-
   const [givenName, ...familyParts] = AUTHOR_NAME.split(' ');
   const familyName = familyParts.join(' ');
 
@@ -84,13 +84,13 @@ export function personNode(): SchemaNode {
       caption: AUTHOR_NAME,
     },
     description: SITE_DESCRIPTION,
-    jobTitle: currentJob.position,
+    jobTitle: CURRENT_POSITION,
     ...(email && { email }),
     sameAs: socialLinks,
     worksFor: {
       '@type': 'Organization',
-      name: currentJob.name,
-      url: currentJob.url,
+      name: CURRENT_ORGANIZATION,
+      url: CURRENT_ORGANIZATION_URL,
     },
     alumniOf: degrees.map((degree) => ({
       '@type': 'CollegeOrUniversity',

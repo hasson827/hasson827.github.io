@@ -16,6 +16,11 @@ export const SITE_IMAGE_DIMENSIONS = {
 export const SITE_DESCRIPTION =
   'An undergraduate student in Electrical Engineering at Zhejiang University and University of Illinois Urbana-Champaign, interested in artificial intelligence, embodied AI, generative models (diffusion models, flow models), and their applications.';
 
+export const CURRENT_POSITION = 'Undergraduate Student';
+export const CURRENT_ORGANIZATION =
+  'Zhejiang University & University of Illinois Urbana-Champaign';
+export const CURRENT_ORGANIZATION_URL = 'https://www.zju.edu.cn/english/';
+
 // Image dimension constants
 export const AVATAR_SIZE = {
   hero: 120,
