@@ -28,12 +28,12 @@ const skills: Skill[] = [
   },
   {
     title: 'LaTeX',
-    competency: 4,
+    competency: 3,
     category: ['Languages'],
   },
   {
     title: 'Markdown',
-    competency: 4,
+    competency: 3,
     category: ['Languages'],
   },
   // Theory
