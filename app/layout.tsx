@@ -12,7 +12,6 @@ import {
   SITE_IMAGE_DIMENSIONS,
   SITE_IMAGE_PATH,
   SITE_URL,
-  TWITTER_HANDLE,
 } from '@/lib/utils';
 import './tailwind.css';
 
