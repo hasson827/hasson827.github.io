@@ -25,10 +25,12 @@
 ### Task 1: Experience data (`work.ts`) + data test update
 
 **Files:**
+
 - Modify: `src/data/resume/work.ts` (full replacement)
 - Test: `src/data/__tests__/work.test.ts` (remove one test block)
 
 **Interfaces:**
+
 - Consumes: nothing new.
 - Produces: unchanged `Position` interface and default export `work: Position[]` (Tasks 3, 4 reuse `Position`; page already consumes `work`).
 
@@ -37,11 +39,11 @@
 Delete this block (lines 59–63):
 
 ```ts
-  // Resume should show at least one current/active position
-  it('has at least one current position (no endDate)', () => {
-    const currentJobs = work.filter((job) => !job.endDate);
-    expect(currentJobs.length).toBeGreaterThanOrEqual(1);
-  });
+// Resume should show at least one current/active position
+it('has at least one current position (no endDate)', () => {
+  const currentJobs = work.filter((job) => !job.endDate);
+  expect(currentJobs.length).toBeGreaterThanOrEqual(1);
+});
 ```
 
 Reason: all four real Experience entries have ended per `Resume.tex`; the invariant was template-derived.
@@ -65,8 +67,7 @@ export interface Position {
 const work: Position[] = [
   {
     name: 'Zhejiang University',
-    position:
-      'Undergraduate Researcher — VRCD (advised by Prof. Xiangming Meng)',
+    position: 'Undergraduate Researcher — VRCD (advised by Prof. Xiangming Meng)',
     url: 'https://www.zju.edu.cn/english/',
     startDate: '2026-03-01',
     endDate: '2026-05-31',
@@ -85,8 +86,7 @@ const work: Position[] = [
     url: 'https://www.zju.edu.cn/english/',
     startDate: '2025-05-01',
     endDate: '2026-05-31',
-    summary:
-      'Phonon band prediction for screening of material thermal properties.',
+    summary: 'Phonon band prediction for screening of material thermal properties.',
     highlights: [
       'Proposed two attention-enhanced GNN schemes (scalar and E(3)-equivariant attention) for crystal phonon band prediction, achieving up to 17.0% relative error reduction while preserving physical symmetries.',
       'Conducted systematic experiments and ablation studies on ~1,500 inorganic crystals, establishing a reproducible ML pipeline for high-throughput thermal property screening.',
@@ -138,12 +138,14 @@ git push
 ### Task 2: Education details (`degrees.ts` + `Degree.tsx`)
 
 **Files:**
+
 - Modify: `src/data/resume/degrees.ts` (full replacement)
 - Modify: `src/components/Resume/Education/Degree.tsx` (full replacement)
 - Test: `src/components/__tests__/Resume/Education.test.tsx` (add one test)
 - Test: `src/data/__tests__/degrees.test.ts` (add one test)
 
 **Interfaces:**
+
 - Consumes: existing `Degree` type import in `Degree.tsx` and `Education.tsx`.
 - Produces: `Degree` gains optional `details?: string[]`; `Degree.tsx` renders `details` as a `ul.points` list under the school line. No consumer changes required (field is optional).
 
@@ -152,17 +154,17 @@ git push
 In `src/components/__tests__/Resume/Education.test.tsx`, add inside the `describe('Degree', ...)` block (after the `'displays year'` test):
 
 ```tsx
-  it('renders details when provided', () => {
-    const degreeWithDetails = {
-      ...mockDegree,
-      details: ['GPA: 4.00/4.00', "Dean's List 2024–2025"],
-    };
+it('renders details when provided', () => {
+  const degreeWithDetails = {
+    ...mockDegree,
+    details: ['GPA: 4.00/4.00', "Dean's List 2024–2025"],
+  };
 
-    render(<Degree data={degreeWithDetails} />);
+  render(<Degree data={degreeWithDetails} />);
 
-    expect(screen.getByText('GPA: 4.00/4.00')).toBeInTheDocument();
-    expect(screen.getByText("Dean's List 2024–2025")).toBeInTheDocument();
-  });
+  expect(screen.getByText('GPA: 4.00/4.00')).toBeInTheDocument();
+  expect(screen.getByText("Dean's List 2024–2025")).toBeInTheDocument();
+});
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -244,17 +246,17 @@ export default function Degree({ data }: DegreeProps) {
 Add at the end of the `describe('degrees data', ...)` block:
 
 ```ts
-  it('details are non-empty strings when present', () => {
-    for (const degree of degrees) {
-      if (degree.details) {
-        expect(Array.isArray(degree.details)).toBe(true);
-        for (const detail of degree.details) {
-          expect(typeof detail).toBe('string');
-          expect(detail.trim().length).toBeGreaterThan(0);
-        }
+it('details are non-empty strings when present', () => {
+  for (const degree of degrees) {
+    if (degree.details) {
+      expect(Array.isArray(degree.details)).toBe(true);
+      for (const detail of degree.details) {
+        expect(typeof detail).toBe('string');
+        expect(detail.trim().length).toBeGreaterThan(0);
       }
     }
-  });
+  }
+});
 ```
 
 - [ ] **Step 6: Run tests, verify pass**
@@ -276,12 +278,14 @@ git push
 ### Task 3: Activities data + component
 
 **Files:**
+
 - Create: `src/data/resume/activities.ts`
 - Test: `src/data/__tests__/activities.test.ts` (create)
 - Create: `src/components/Resume/Activities.tsx`
 - Test: `src/components/__tests__/Resume/Activities.test.tsx` (create)
 
 **Interfaces:**
+
 - Consumes: `Position` type from `src/data/resume/work.ts` (Task 1); `Job` card component from `src/components/Resume/Experience/Job`.
 - Produces: default export `activities: Position[]` from `@/data/resume/activities`; default export `Activities({ data: Position[] })` from `@/components/Resume/Activities` — consumed by Task 7 (page wiring). Section anchor id: `activities`.
 
@@ -429,9 +433,7 @@ describe('Activities', () => {
   it('renders the activities section with title', () => {
     render(<Activities data={mockActivities} />);
 
-    expect(
-      screen.getByRole('heading', { name: /activities/i }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /activities/i })).toBeInTheDocument();
   });
 
   it('renders all activities', () => {
@@ -458,9 +460,7 @@ describe('Activities', () => {
   it('handles empty activities array', () => {
     render(<Activities data={[]} />);
 
-    expect(
-      screen.getByRole('heading', { name: /activities/i }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /activities/i })).toBeInTheDocument();
     const articles = document.querySelectorAll('.jobs-container');
     expect(articles.length).toBe(0);
   });
@@ -517,10 +517,12 @@ git push
 ### Task 4: Same-month date rendering fix (`Job.tsx`)
 
 **Files:**
+
 - Modify: `src/components/Resume/Experience/Job.tsx`
 - Test: `src/components/__tests__/Resume/Job.test.tsx` (add one test)
 
 **Interfaces:**
+
 - Consumes: unchanged `Position` type.
 - Produces: unchanged `Job` props. Rendering change only: when `startDate` and `endDate` fall in the same calendar month, the date range renders the month once instead of twice. Needed by the Juxi entry (July 2025) from Task 3; no consumer changes.
 
@@ -529,18 +531,18 @@ git push
 In `src/components/__tests__/Resume/Job.test.tsx`, add after the `'shows Present for current job (no end date)'` test:
 
 ```tsx
-  it('renders a single date when start and end are in the same month', () => {
-    const oneMonthJob = {
-      ...mockJob,
-      startDate: '2025-07-01',
-      endDate: '2025-07-31',
-    };
+it('renders a single date when start and end are in the same month', () => {
+  const oneMonthJob = {
+    ...mockJob,
+    startDate: '2025-07-01',
+    endDate: '2025-07-31',
+  };
 
-    render(<Job data={oneMonthJob} />);
+  render(<Job data={oneMonthJob} />);
 
-    const matches = screen.getAllByText(/july 2025/i);
-    expect(matches.length).toBe(1);
-  });
+  const matches = screen.getAllByText(/july 2025/i);
+  expect(matches.length).toBe(1);
+});
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -566,8 +568,7 @@ interface JobProps {
 export default function Job({ data }: JobProps) {
   const { name, position, url, startDate, endDate, summary, highlights } = data;
 
-  const sameMonth =
-    endDate !== undefined && dayjs(startDate).isSame(dayjs(endDate), 'month');
+  const sameMonth = endDate !== undefined && dayjs(startDate).isSame(dayjs(endDate), 'month');
 
   return (
     <article className="jobs-container">
@@ -577,16 +578,12 @@ export default function Job({ data }: JobProps) {
         </h4>
         <p className="daterange">
           {' '}
-          <time dateTime={startDate}>
-            {dayjs(startDate).format('MMMM YYYY')}
-          </time>{' '}
+          <time dateTime={startDate}>{dayjs(startDate).format('MMMM YYYY')}</time>{' '}
           {sameMonth ? null : (
             <>
               -{' '}
               {endDate ? (
-                <time dateTime={endDate}>
-                  {dayjs(endDate).format('MMMM YYYY')}
-                </time>
+                <time dateTime={endDate}>{dayjs(endDate).format('MMMM YYYY')}</time>
               ) : (
                 'Present'
               )}
@@ -628,9 +625,11 @@ git push
 ### Task 5: Skills data (`skills.ts`)
 
 **Files:**
+
 - Modify: `src/data/resume/skills.ts` (replace the `skills` array only)
 
 **Interfaces:**
+
 - Consumes: nothing new.
 - Produces: unchanged `Skill`/`Category` interfaces and `skills`/`categories` exports. Categories become `English`, `Languages`, `Theory` (auto-built, alphabetical).
 
@@ -727,9 +726,11 @@ git push
 ### Task 6: Courses data (`courses.ts`)
 
 **Files:**
+
 - Modify: `src/data/resume/courses.ts` (full replacement)
 
 **Interfaces:**
+
 - Consumes: nothing new.
 - Produces: unchanged `Course` interface and default export `courses: Course[]`. All entries use `university: 'UIUC'` and links of the form `https://courses.illinois.edu/schedule/terms/{DEPT}/{NUM}`.
 
@@ -878,11 +879,13 @@ git push
 ### Task 7: Page wiring (`page.tsx` + `ResumeNav.tsx`) + nav test
 
 **Files:**
+
 - Modify: `app/resume/page.tsx` (full replacement)
 - Modify: `src/components/Resume/ResumeNav.tsx` (one-line change to `sections` array)
 - Test: `src/components/__tests__/Resume/ResumeNav.test.tsx` (update two tests)
 
 **Interfaces:**
+
 - Consumes: `activities` from `@/data/resume/activities` and `Activities` from `@/components/Resume/Activities` (Task 3).
 - Produces: `/resume` page with section order Experience → Education → Activities → Skills → Courses → References; nav entry `{ name: 'Activities', id: 'activities' }` between Education and Skills.
 
@@ -893,20 +896,18 @@ In `src/components/__tests__/Resume/ResumeNav.test.tsx`:
 1. In the `'renders links to all resume sections'` test, add after the `#education` assertion:
 
 ```tsx
-    expect(
-      screen.getByRole('link', { name: /activities/i }),
-    ).toHaveAttribute('href', '#activities');
+expect(screen.getByRole('link', { name: /activities/i })).toHaveAttribute('href', '#activities');
 ```
 
 2. Replace the `'renders 5 navigation links'` test with:
 
 ```tsx
-  it('renders 6 navigation links', () => {
-    render(<ResumeNav />);
+it('renders 6 navigation links', () => {
+  render(<ResumeNav />);
 
-    const links = screen.getAllByRole('link');
-    expect(links.length).toBe(6);
-  });
+  const links = screen.getAllByRole('link');
+  expect(links.length).toBe(6);
+});
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
@@ -965,10 +966,9 @@ export default function ResumePage() {
         <header className="resume-header">
           <h1 className="resume-title">Resume</h1>
           <p className="resume-summary">
-            Electrical Engineering undergraduate in the ZJU–UIUC dual-degree
-            program. My research spans machine learning for materials science
-            and efficient inference for diffusion-based multimodal LLMs.
-            Ranked 1/71 at Zhejiang University with a 4.00 GPA at UIUC.
+            Electrical Engineering undergraduate in the ZJU–UIUC dual-degree program. My research
+            spans machine learning for materials science and efficient inference for diffusion-based
+            multimodal LLMs. Ranked 1/71 at Zhejiang University with a 4.00 GPA at UIUC.
           </p>
         </header>
 

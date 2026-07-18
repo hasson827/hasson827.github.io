@@ -22,12 +22,12 @@ Populate the `/resume` page with Hongshuo Zhao's real content from `Resume.tex`,
 
 Replace the single "Undergraduate Student" placeholder with 4 entries (all `name: 'Zhejiang University'`, `url: 'https://www.zju.edu.cn/english/'`), in this order:
 
-| position | startDate | endDate | highlights |
-|---|---|---|---|
-| Undergraduate Researcher — VRCD (advised by Prof. Xiangming Meng) | 2026-03-01 | 2026-05-31 | Full title "Visual-Redundancy-Controlled Parallel Decoding for Diffusion-Based Multimodal LLMs" + "Submitted to NeurIPS 2026" in `summary`; 3 bullets from .tex (VRI metric; training-free attention reranking; +18.8% M3CoT / +6.9% MMBench at ~1.5% overhead) |
-| Undergraduate Researcher — Phonon Band Prediction (National Innovation Project, advised by Prof. Wee-Liat Ong) | 2025-05-01 | 2026-05-31 | 2 bullets: attention-enhanced GNNs (scalar + E(3)-equivariant), 17.0% relative error reduction; reproducible ML pipeline over ~1,500 inorganic crystals |
-| Undergraduate Teaching Assistant — MATH 257 Linear Algebra | 2026-03-01 | 2026-06-30 | discussion sessions / office hours; directed and graded assignments |
-| Admission Team Member — Suzhou, Jiangsu | 2025-06-01 | 2026-06-30 | first highlight clarifies "Seasonal role: June 2025 and June 2026 admissions cycles"; second highlight: application recommendations from previous years' data |
+| position                                                                                                       | startDate  | endDate    | highlights                                                                                                                                                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------- | ---------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Undergraduate Researcher — VRCD (advised by Prof. Xiangming Meng)                                              | 2026-03-01 | 2026-05-31 | Full title "Visual-Redundancy-Controlled Parallel Decoding for Diffusion-Based Multimodal LLMs" + "Submitted to NeurIPS 2026" in `summary`; 3 bullets from .tex (VRI metric; training-free attention reranking; +18.8% M3CoT / +6.9% MMBench at ~1.5% overhead) |
+| Undergraduate Researcher — Phonon Band Prediction (National Innovation Project, advised by Prof. Wee-Liat Ong) | 2025-05-01 | 2026-05-31 | 2 bullets: attention-enhanced GNNs (scalar + E(3)-equivariant), 17.0% relative error reduction; reproducible ML pipeline over ~1,500 inorganic crystals                                                                                                         |
+| Undergraduate Teaching Assistant — MATH 257 Linear Algebra                                                     | 2026-03-01 | 2026-06-30 | discussion sessions / office hours; directed and graded assignments                                                                                                                                                                                             |
+| Admission Team Member — Suzhou, Jiangsu                                                                        | 2025-06-01 | 2026-06-30 | first highlight clarifies "Seasonal role: June 2025 and June 2026 admissions cycles"; second highlight: application recommendations from previous years' data                                                                                                   |
 
 ### 2. `src/data/resume/degrees.ts` + `src/components/Resume/Education/Degree.tsx`
 
@@ -63,26 +63,26 @@ Competency only controls tag sort order within the cloud; it is not displayed.
 
 Replace 13 Stanford template courses with the user's 18 UIUC courses. All `university: 'UIUC'`, links use the official catalog pattern `https://courses.illinois.edu/schedule/terms/{DEPT}/{NUM}`. Titles verified at catalog.illinois.edu (2026-07-18):
 
-| number | title |
-|---|---|
-| ECE 110 | Introduction to Electronics |
-| ECE 120 | Introduction to Computing |
-| ECE 210 | Analog Signal Processing |
-| ECE 220 | Computer Systems & Programming |
-| MATH 221 | Calculus I |
-| MATH 231 | Calculus II |
-| MATH 241 | Calculus III |
-| MATH 285 | Intro Differential Equations |
-| MATH 213 | Basic Discrete Mathematics |
+| number   | title                                          |
+| -------- | ---------------------------------------------- |
+| ECE 110  | Introduction to Electronics                    |
+| ECE 120  | Introduction to Computing                      |
+| ECE 210  | Analog Signal Processing                       |
+| ECE 220  | Computer Systems & Programming                 |
+| MATH 221 | Calculus I                                     |
+| MATH 231 | Calculus II                                    |
+| MATH 241 | Calculus III                                   |
+| MATH 285 | Intro Differential Equations                   |
+| MATH 213 | Basic Discrete Mathematics                     |
 | MATH 257 | Linear Algebra with Computational Applications |
-| CS 101 | Intro Computing: Engrg & Sci |
-| CS 225 | Data Structures |
-| RHET 101 | Principles of Writing |
-| RHET 102 | Principles of Research |
-| PHYS 211 | University Physics: Mechanics |
-| PHYS 212 | University Physics: Elec & Mag |
-| PHYS 213 | Univ Physics: Thermal Physics |
-| PHYS 214 | Univ Physics: Quantum Physics |
+| CS 101   | Intro Computing: Engrg & Sci                   |
+| CS 225   | Data Structures                                |
+| RHET 101 | Principles of Writing                          |
+| RHET 102 | Principles of Research                         |
+| PHYS 211 | University Physics: Mechanics                  |
+| PHYS 212 | University Physics: Elec & Mag                 |
+| PHYS 213 | Univ Physics: Thermal Physics                  |
+| PHYS 214 | Univ Physics: Quantum Physics                  |
 
 Note: `courses.illinois.edu` returns 403 to non-browser fetchers but is the official public catalog URL (confirmed from catalog.illinois.edu itself); fine as an href.
 
