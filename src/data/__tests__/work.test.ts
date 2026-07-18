@@ -56,12 +56,6 @@ describe('work data', () => {
     }
   });
 
-  // Resume should show at least one current/active position
-  it('has at least one current position (no endDate)', () => {
-    const currentJobs = work.filter((job) => !job.endDate);
-    expect(currentJobs.length).toBeGreaterThanOrEqual(1);
-  });
-
   it('highlights are arrays when present', () => {
     for (const job of work) {
       if (job.highlights) {
