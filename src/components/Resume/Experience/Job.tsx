@@ -11,6 +11,9 @@ interface JobProps {
 export default function Job({ data }: JobProps) {
   const { name, position, url, startDate, endDate, summary, highlights } = data;
 
+  const sameMonth =
+    endDate !== undefined && dayjs(startDate).isSame(dayjs(endDate), 'month');
+
   return (
     <article className="jobs-container">
       <header>
@@ -22,11 +25,17 @@ export default function Job({ data }: JobProps) {
           <time dateTime={startDate}>
             {dayjs(startDate).format('MMMM YYYY')}
           </time>{' '}
-          -{' '}
-          {endDate ? (
-            <time dateTime={endDate}>{dayjs(endDate).format('MMMM YYYY')}</time>
-          ) : (
-            'Present'
+          {sameMonth ? null : (
+            <>
+              -{' '}
+              {endDate ? (
+                <time dateTime={endDate}>
+                  {dayjs(endDate).format('MMMM YYYY')}
+                </time>
+              ) : (
+                'Present'
+              )}
+            </>
           )}
         </p>
       </header>

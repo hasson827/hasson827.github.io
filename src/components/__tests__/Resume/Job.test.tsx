@@ -47,6 +47,19 @@ describe('Job', () => {
     expect(screen.getByText(/present/i)).toBeInTheDocument();
   });
 
+  it('renders a single date when start and end are in the same month', () => {
+    const oneMonthJob = {
+      ...mockJob,
+      startDate: '2025-07-01',
+      endDate: '2025-07-31',
+    };
+
+    render(<Job data={oneMonthJob} />);
+
+    const matches = screen.getAllByText(/july 2025/i);
+    expect(matches.length).toBe(1);
+  });
+
   it('renders summary with markdown', () => {
     render(<Job data={mockJob} />);
 
