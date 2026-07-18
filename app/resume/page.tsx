@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import Activities from '@/components/Resume/Activities';
 import Courses from '@/components/Resume/Courses';
 import Education from '@/components/Resume/Education';
 import Experience from '@/components/Resume/Experience';
@@ -7,6 +8,7 @@ import References from '@/components/Resume/References';
 import ResumeNav from '@/components/Resume/ResumeNav';
 import Skills from '@/components/Resume/Skills';
 import PageWrapper from '@/components/Template/PageWrapper';
+import activities from '@/data/resume/activities';
 import courses from '@/data/resume/courses';
 import degrees from '@/data/resume/degrees';
 import { categories, skills } from '@/data/resume/skills';
@@ -16,7 +18,7 @@ import { createPageMetadata } from '@/lib/metadata';
 export const metadata: Metadata = createPageMetadata({
   title: 'Resume',
   description:
-    "Michael D'Angelo's Resume. OpenAI, Promptfoo, Smile ID, Arthena, Matroid, Stanford ICME, YC alum.",
+    "Hongshuo Zhao's resume — ZJU–UIUC Electrical Engineering dual-degree student researching machine learning for materials science and diffusion-based multimodal LLMs.",
   path: '/resume/',
 });
 
@@ -27,12 +29,10 @@ export default function ResumePage() {
         <header className="resume-header">
           <h1 className="resume-title">Resume</h1>
           <p className="resume-summary">
-            Engineering leader with 15+ years building products across AI,
-            security, and infrastructure. Currently Member of the Technical
-            Staff at OpenAI, where I work on Promptfoo and agent security.
-            Previously co-founded Promptfoo, built it into an AI security
-            platform, and sold it to OpenAI. Stanford MS, YC alum, previously VP
-            Engineering.
+            Electrical Engineering undergraduate in the ZJU–UIUC dual-degree
+            program. My research spans machine learning for materials science
+            and efficient inference for diffusion-based multimodal LLMs. Ranked
+            1/71 at Zhejiang University with a 4.00 GPA at UIUC.
           </p>
         </header>
 
@@ -45,6 +45,10 @@ export default function ResumePage() {
 
           <section id="education" className="resume-section">
             <Education data={degrees} />
+          </section>
+
+          <section id="activities" className="resume-section">
+            <Activities data={activities} />
           </section>
 
           <section id="skills" className="resume-section">
