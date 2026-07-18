@@ -57,4 +57,16 @@ describe('degrees data', () => {
       expect(degree.degree.trim().length).toBeGreaterThan(0);
     }
   });
+
+  it('details are non-empty strings when present', () => {
+    for (const degree of degrees) {
+      if (degree.details) {
+        expect(Array.isArray(degree.details)).toBe(true);
+        for (const detail of degree.details) {
+          expect(typeof detail).toBe('string');
+          expect(detail.trim().length).toBeGreaterThan(0);
+        }
+      }
+    }
+  });
 });

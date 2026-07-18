@@ -82,6 +82,18 @@ describe('Degree', () => {
     expect(screen.getByText(/2020/)).toBeInTheDocument();
   });
 
+  it('renders details when provided', () => {
+    const degreeWithDetails = {
+      ...mockDegree,
+      details: ['GPA: 4.00/4.00', "Dean's List 2024–2025"],
+    };
+
+    render(<Degree data={degreeWithDetails} />);
+
+    expect(screen.getByText('GPA: 4.00/4.00')).toBeInTheDocument();
+    expect(screen.getByText("Dean's List 2024–2025")).toBeInTheDocument();
+  });
+
   it('renders as article element', () => {
     render(<Degree data={mockDegree} />);
 
