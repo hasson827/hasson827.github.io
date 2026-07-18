@@ -12,113 +12,66 @@ export interface Category {
 const skills: Skill[] = [
   // Languages
   {
+    title: 'C++',
+    competency: 5,
+    category: ['Languages'],
+  },
+  {
     title: 'Python',
     competency: 5,
-    category: ['Languages', 'ML Engineering'],
+    category: ['Languages'],
   },
   {
-    title: 'TypeScript',
-    competency: 5,
-    category: ['Languages', 'Web Development'],
-  },
-  {
-    title: 'SQL',
+    title: 'MATLAB',
     competency: 4,
-    category: ['Languages', 'Databases'],
-  },
-  // AI & LLM
-  {
-    title: 'AI Agents',
-    competency: 5,
-    category: ['ML Engineering'],
+    category: ['Languages'],
   },
   {
-    title: 'LLM Evaluation',
-    competency: 5,
-    category: ['ML Engineering'],
-  },
-  {
-    title: 'AI Red-teaming',
-    competency: 5,
-    category: ['ML Engineering'],
-  },
-  {
-    title: 'LLM APIs',
-    competency: 5,
-    category: ['ML Engineering'],
-  },
-  {
-    title: 'RAG',
+    title: 'LaTeX',
     competency: 4,
-    category: ['ML Engineering'],
+    category: ['Languages'],
   },
   {
-    title: 'Prompt Engineering',
+    title: 'Markdown',
     competency: 4,
-    category: ['ML Engineering'],
+    category: ['Languages'],
   },
+  // Theory
   {
-    title: 'Vector Databases',
+    title: 'Machine Learning',
     competency: 4,
-    category: ['ML Engineering', 'Databases'],
+    category: ['Theory'],
   },
   {
-    title: 'PyTorch',
+    title: 'Generative Modeling',
     competency: 4,
-    category: ['ML Engineering'],
+    category: ['Theory'],
   },
   {
-    title: 'Pandas',
-    competency: 5,
-    category: ['ML Engineering', 'Data Engineering'],
-  },
-  // Web Development
-  {
-    title: 'Node.js',
-    competency: 5,
-    category: ['Web Development'],
-  },
-  {
-    title: 'FastAPI',
+    title: 'Data Structures',
     competency: 4,
-    category: ['Web Development'],
+    category: ['Theory'],
   },
   {
-    title: 'Next.js',
+    title: 'Algorithms',
+    competency: 4,
+    category: ['Theory'],
+  },
+  // English
+  {
+    title: 'CET-4: 624',
     competency: 3,
-    category: ['Web Development'],
-  },
-  // Databases
-  {
-    title: 'PostgreSQL',
-    competency: 4,
-    category: ['Databases'],
+    category: ['English'],
   },
   {
-    title: 'Redis',
+    title: 'CET-6: 597',
     competency: 3,
-    category: ['Databases'],
-  },
-  // Infrastructure
-  {
-    title: 'AWS',
-    competency: 4,
-    category: ['Infrastructure'],
+    category: ['English'],
   },
   {
-    title: 'Docker',
-    competency: 4,
-    category: ['Infrastructure'],
-  },
-  {
-    title: 'Kubernetes',
+    title: 'TOEFL: 5.5',
     competency: 3,
-    category: ['Infrastructure'],
-  },
-  {
-    title: 'Observability',
-    competency: 4,
-    category: ['Infrastructure', 'ML Engineering'],
+    category: ['English'],
   },
 ].map((skill) => ({ ...skill, category: skill.category.sort() }));
 
